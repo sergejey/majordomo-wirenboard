@@ -1,0 +1,30 @@
+[#if DATA_SOURCE=""#]
+<h3>WirenBoard - <#LANG_DATA#></h3>
+ <!-- action usual -->
+ <!-- table mqtt search -->
+ [#if VIEW_MODE="search_wirenboard" || VIEW_MODE=""#]
+  [#inc wirenboard_search_admin.html#]
+ [#endif VIEW_MODE#]
+ <!-- / table mqtt search -->
+ <!-- table mqtt edit -->
+ [#if VIEW_MODE="edit_wirenboard"#]
+   [#inc wirenboard_edit.html#]
+ [#endif VIEW_MODE#]
+ <!-- / table mqtt edit -->
+[#endif DATA_SOURCE#]
+
+[#if DATA_SOURCE="wirenboard_devices"#]
+<h3>WirenBoard - <#LANG_DEVICES#></h3>
+<!-- action usual -->
+<!-- table mqtt search -->
+[#if VIEW_MODE="search_wirenboard_devices" || VIEW_MODE=""#]
+[#inc wirenboard_devices_search_admin.html#]
+<p><a href="?">&lt;&lt;&lt;  WirenBoard - <#LANG_DATA#></a></p>
+[#endif VIEW_MODE#]
+<!-- / table mqtt search -->
+<!-- table mqtt edit -->
+[#if VIEW_MODE="edit_wirenboard_devices"#]
+[#inc wirenboard_devices_edit.html#]
+[#endif VIEW_MODE#]
+<!-- / table mqtt edit -->
+[#endif DATA_SOURCE#]
