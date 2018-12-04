@@ -100,15 +100,18 @@
  <div class="controls">
  [#VALUE#]
   [#if DATA_TYPE!=""#](<#LANG_TYPE#>: [#DATA_TYPE#])[#endif#]
+  <br/>Meta-data: [#META_DATA#]
  </div>
 </div>
 
+ [#if READONLY!="1"#]
 <div class="form-group">
  <label class="control-label"[#if ERR_VALUE#] style="color:red;font-weight:bold"[#endif#]>
  <#LANG_SET#>:
  </label>
  <div class="controls"><input type="text" name="new_value" value="" class="form-control"></div>
 </div>
+ [#endif READONLY#]
 
  [#if SDEVICE_TYPE!=""#]
  <div class="form-group">

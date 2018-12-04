@@ -186,7 +186,7 @@ class wirenboard extends module
     {
         $rec = SQLSelectOne("SELECT * FROM wirenboard WHERE ID='" . $id . "'");
 
-        if (!$rec['ID'] || !$rec['PATH']) {
+        if (!$rec['ID'] || !$rec['PATH'] || $rec['READONLY']==1) {
             return 0;
         }
 
@@ -234,9 +234,9 @@ class wirenboard extends module
             return 0;
         }
 
-        if ($rec['DATA_TYPE']=='switch') {
-            $rec['PATH_WRITE']=$rec['PATH'].'/on';
-        }
+        //if ($rec['DATA_TYPE']=='switch') {
+          $rec['PATH_WRITE']=$rec['PATH'].'/on';
+        //}
 
         if ($rec['PATH_WRITE']) {
             if (preg_match('/^http:/', $rec['PATH_WRITE'])) {
@@ -287,12 +287,14 @@ class wirenboard extends module
             return 0;
         }
         if (preg_match('/(.+?)\/meta\/(\w+)$/',$path,$m)) {
-            //todo: set meta information for topic
             $path=$m[1];
             $meta_name=$m[2];
             $meta_value=$value;
         }
         if (preg_match('/\/rpc\/v\d+\//',$path)) {
+            return 0;
+        }
+        if (preg_match('/\/on$/',$path)) {
             return 0;
         }
 
@@ -320,6 +322,9 @@ class wirenboard extends module
             $meta_data[$meta_name]=$meta_value;
             if ($meta_name=='type') {
                 $rec['DATA_TYPE']=$meta_value;
+            }
+            if ($meta_name=='readonly' && $meta_value=='1') {
+                $rec['READONLY']=1;
             }
             $rec['META_DATA']=json_encode($meta_data);
         }
@@ -564,6 +569,7 @@ class wirenboard extends module
  wirenboard: QOS int(3) NOT NULL DEFAULT '0'
  wirenboard: RETAIN int(3) NOT NULL DEFAULT '0'
  wirenboard: DISP_FLAG int(3) NOT NULL DEFAULT '0'
+ wirenboard: READONLY int(3) NOT NULL DEFAULT '0'
 
  wirenboard_devices: ID int(10) unsigned NOT NULL auto_increment
  wirenboard_devices: TITLE varchar(255) NOT NULL DEFAULT ''

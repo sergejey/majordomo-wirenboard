@@ -58,7 +58,7 @@
  <li style="list-style-type: none">
   [#if ID!=""#]
   [#if TITLE!=""#]<b>&bull;</b>&nbsp;[#endif#]<a href="?view_mode=edit_wirenboard&id=[#ID#]" title="[#PATH#]">[#if TITLE=""#]<b>&bull;</b>&nbsp;[#else#][#TITLE#][#endif#]</a>: <span id="mqtt[#ID#]" class="mqtt_value" style="font-weight:bold;">[#VALUE#]</span>
-  [#if DATA_TYPE!=""#]([#DATA_TYPE#])[#endif#]
+  [#if DATA_TYPE!=""#](<span title='[#META_DATA#]'>[#DATA_TYPE#][#if READONLY="1"#], read-only[#endif#]</span>)[#endif#]
   [#if LINKED_OBJECT!=""#]<i>([#LINKED_OBJECT#].[#LINKED_PROPERTY#] - [#DESCRIPTION#])</i>[#endif LINKED_OBJECT#]
   [#else#]<b>&bull;&nbsp;[#TITLE#]</b>[#endif#]
   [#if RESULT#]<ul>[#tree RESULT#]</ul>[#endif RESULT#]
