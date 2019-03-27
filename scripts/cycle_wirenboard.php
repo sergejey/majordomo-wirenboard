@@ -13,7 +13,7 @@ include_once(DIR_MODULES . "control_modules/control_modules.class.php");
 
 set_time_limit(0);
 
-require("./lib/mqtt/phpMQTT.php");
+include_once(ROOT . "3rdparty/phpmqtt/phpMQTT.php");
 include_once(DIR_MODULES . "wirenboard/wirenboard.class.php");
 
 $wb_module = new wirenboard();
@@ -47,7 +47,7 @@ for ($i = 0; $i < $total; $i++) {
         $query = '/#';
     }
 
-    $mqtt_client = new phpMQTT($host, $port, $client_name);
+    $mqtt_client = new Bluerhinos\phpMQTT($host, $port, $client_name);
     if ($username)
     {
         if (!$mqtt_client->connect(true, NULL, $username, $password)) {
@@ -100,7 +100,7 @@ while(1) {
         $db->Disconnect();
         exit;
     }
-    usleep(500);
+    usleep(50000);
 }
 
  $db->Disconnect(); // closing database connection

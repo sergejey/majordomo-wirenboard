@@ -208,7 +208,7 @@ class wirenboard extends module
         if (!$device_rec['ID']) {
             return 0;
         }
-        include_once("./lib/mqtt/phpMQTT.php");
+        include_once(ROOT . "3rdparty/phpmqtt/phpMQTT.php");
 
         $this->getConfig();
         $client_name = "MajorDoMo MQTT Client";
@@ -227,7 +227,7 @@ class wirenboard extends module
             $port = 1883;
         }
 
-        $mqtt_client = new phpMQTT($host, $port, $client_name . ' Write');
+        $mqtt_client = new Bluerhinos\phpMQTT($host, $port, $client_name . ' Write');
 
         if (!$mqtt_client->connect(true, NULL, $username, $password)) {
             DebMes("Failed to connect to $host:$port ($username/$password);",'wirenboard');
@@ -283,6 +283,9 @@ class wirenboard extends module
      */
     function processMessage($device_id, $path, $value)
     {
+
+        DebMes("$path :".$value,'wirenboard'.$device_id);
+
         if (preg_match('/\#$/', $path)) {
             return 0;
         }
