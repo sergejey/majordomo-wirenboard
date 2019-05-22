@@ -49,6 +49,7 @@ if ($this->mode == 'update') {
 
     $old_linked_object = $rec['LINKED_OBJECT'];
     $old_linked_property = $rec['LINKED_PROPERTY'];
+    $old_linked_method = $rec['LINKED_METHOD'];
 
 
     //updating 'LINKED_OBJECT' (varchar)
@@ -57,6 +58,9 @@ if ($this->mode == 'update') {
     //updating 'LINKED_PROPERTY' (varchar)
     global $linked_property;
     $rec['LINKED_PROPERTY'] = $linked_property;
+
+    global $linked_method;
+    $rec['LINKED_METHOD'] = $linked_method;
 
 
     //UPDATING RECORD

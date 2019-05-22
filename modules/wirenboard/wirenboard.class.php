@@ -358,6 +358,9 @@ class wirenboard extends module
                 }
                 setGlobal($rec['LINKED_OBJECT'] . '.' . $rec['LINKED_PROPERTY'], $value, array($this->name => '0'));
             }
+            if ($rec['LINKED_OBJECT'] && $rec['LINKED_METHOD']) {
+                callMethod($rec['LINKED_OBJECT'] . '.' . $rec['LINKED_METHOD'], array('VALUE'=>$value));
+            }
         }
     }
 
